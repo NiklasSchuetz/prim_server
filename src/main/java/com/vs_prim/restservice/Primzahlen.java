@@ -9,7 +9,6 @@ public class Primzahlen {
     String prim_string;
 
     public Primzahlen(List<Integer> list, String prim_string) {
-        this.list = list;
         this.prim_string = prim_string;
     }
 

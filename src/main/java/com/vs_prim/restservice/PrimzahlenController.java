@@ -3,7 +3,6 @@ package com.vs_prim.restservice;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +18,7 @@ public class PrimzahlenController {
 
 
 	@GetMapping("/array")
-	public JSONObject  prim_array(@RequestParam(value = "nr") int nr) {
+	public String  prim_array(@RequestParam(value = "nr") int nr) {
 		List<Integer> list = Primzahlen.compute_Prime(nr);
 
 		JSONArray json_arr = new JSONArray();
@@ -31,13 +30,16 @@ public class PrimzahlenController {
 		JSONObject obj = new JSONObject();
 		obj.put("array", json_arr);
 
-		return obj;
+		return obj.toString();
 	}
 
 
 	@GetMapping("/struct")
-	public Primzahlen prim_struct(@RequestParam(value = "nr") int nr) {
-		return new Primzahlen(Primzahlen.compute_Prime(nr), Primzahlen.compute_Prime(nr).toString());
+	public String prim_struct(@RequestParam(value = "nr") int nr) {
+		JSONObject obj = new JSONObject();
+		obj.put("array",Primzahlen.compute_Prime(nr));
+		obj.put("string",Primzahlen.compute_Prime(nr).toString());
+		return obj.toString();
 	}
 
 
